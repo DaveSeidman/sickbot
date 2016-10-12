@@ -22,11 +22,16 @@ bot.startRTM(function(err,bot,payload) {
 controller.on('direct_mention', function(bot, message) {
 
     bot.reply(message, "you mention me bro?");
+
+    console.log(message);
 });
 
 controller.on('direct_message', function(bot, message) {
 
     bot.reply(message, "you talking to me bro?");
+
+    console.log(message.text.split(','));
+
 })
 // function callback(response) {
 //
