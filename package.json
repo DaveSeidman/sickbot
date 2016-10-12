@@ -1,7 +1,7 @@
 {
-  "name": "vimeobot",
+  "name": "sickbot",
   "version": "1.0.0",
-  "description": "a simple slackbot that listens for vimeo links and fills in metadata",
+  "description": "a slackbot that helps you come up with excuses for taking a sick day :)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
