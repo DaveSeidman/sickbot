@@ -10,6 +10,14 @@ var currentMessage; // this should probably be an array in case a second link is
 var http = require('http'),
     options = {};
 
+
+var phrases = require('./phrases.json');
+var words = require('./words.json');
+
+var WordPOS = require('wordpos'),
+wordpos = new WordPOS();
+
+
 bot.startRTM(function(err,bot,payload) {
   if (err) {
     throw new Error('Could not connect to Slack');
@@ -17,22 +25,39 @@ bot.startRTM(function(err,bot,payload) {
   else {
       console.log("connected");
   }
-});
+})
 
-controller.on('direct_mention', function(bot, message) {
+// controller.on('direct_mention', (bot, message) => {
+//
+//     bot.reply(message, "you mention me bro?");
+//
+//     console.log(message);
+// })
 
-    bot.reply(message, "you mention me bro?");
+controller.on('direct_message', (bot, message) => {
 
-    console.log(message);
-});
+    wordpos.getNouns(message.text, (result) => {
 
-controller.on('direct_message', function(bot, message) {
-
-    bot.reply(message, "you talking to me bro?");
-
-    console.log(message.text.split(','));
+        bot.reply(message, result.toString());
+    });
 
 })
+
+
+var rand = (list) => {
+
+    return list[Math.floor(Math.random() * list.length)];
+}
+
+//templates.sick.forEach((msg) => {
+
+//console.log(`here's a noun ${words.nouns[Math.floor(Math.random() * words.nouns.length)]} right there`);
+console.log(`here's a verb: ${rand(words.verbs)}  <----- right there`);
+//})
+
+
+
+
 // function callback(response) {
 //
 //     var str = '';
